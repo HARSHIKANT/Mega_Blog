@@ -22,6 +22,10 @@ function PostForm({post}) {
     console.log("Form submitted:", data);
     console.log("Raw image field:", data.image);
     console.log("First file:", data.image?.[0]);
+    if (data.slug.length > 36 || !/^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(data.slug)) {
+        alert("Invalid slug! Must be ≤ 36 chars and only letters, numbers, ., -, _ (no special char at start)");
+        return;
+      }
 
     if (post) {
         let fileId = post.featuredImage; // keep old one by default

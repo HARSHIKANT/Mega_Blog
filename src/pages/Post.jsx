@@ -12,7 +12,7 @@ export default function Post() {
 
     const userData = useSelector((state) => state.auth.userData)
 
-    const isAuthor = post && userData ? post.userId === userData.$id : false;
+    const isAuthor = post && userData ? post.UserID === userData.$id : false;
 
     useEffect(() => {
         if (slug) {
@@ -45,7 +45,7 @@ export default function Post() {
                 <img src={appwriteService.getFilePreview(post.featuredImage)} alt ={post.title} className='rounded-xl' />
                 {isAuthor && (
                     <div className='absolute right-6'>
-                        <Link to={`/edit-post/${post.id}`}>
+                        <Link to={`/edit-post/${post.$id}`}>
                             <Button bgColor = 'bg-green-500' className = "mr-3">Edit</Button>
                         </Link>
                         <Button bgColor="bg-green-500" onClick={deletePost}>Delete</Button>
@@ -59,15 +59,6 @@ export default function Post() {
                 {parse(post.content)}
             </div>
         </Container>
-        <div>
-      {/* your post content */}
-      <button
-        onClick={() => navigate(`/edit-post/${slug}`)}
-        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-      >
-        Edit Post
-      </button>
-    </div>
     </div> 
   ) : null;
 }
